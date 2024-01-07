@@ -1,6 +1,7 @@
 import torch
+import 
 
-class MyNeuralNet(torch.nn.Module):
+class Network(torch.nn.Module):
     """ Basic neural network class. 
     
     Args:
