@@ -1,5 +1,4 @@
 [core]
     remote = public-remote
-
 ['remote "public-remote"']
     url = https://drive.google.com/drive/folders/1X2P4EfkFSkOlSrUg8ugygr5blUvGojsE?usp=sharing
