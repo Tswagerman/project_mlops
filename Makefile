@@ -4,7 +4,7 @@
 # GLOBALS                                                                       #
 #################################################################################
 
-PROJECT_NAME = project_mlops
+PROJECT_NAME = src
 PYTHON_VERSION = 3.11
 PYTHON_INTERPRETER = python
 
@@ -39,6 +39,12 @@ clean:
 ## Process raw data into processed data
 data:
 	python $(PROJECT_NAME)/data/make_dataset.py
+
+train:  
+	python $(PROJECT_NAME)/train_model.py
+
+evaluate:  
+	python $(PROJECT_NAME)/predict_model.py
 
 #################################################################################
 # Documentation RULES                                                           #

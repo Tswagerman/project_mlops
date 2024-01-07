@@ -20,7 +20,7 @@ def get_data():
     csv_file_path = os.path.join(dvc_remote_path, 'data/raw/news.csv')  # Adjust the path to your CSV file
     df = pd.read_csv(csv_file_path)
 
-    print(df.head())
+    print(df)
 
 if __name__ == '__main__':
     get_data()
