@@ -7,6 +7,7 @@ from model import TextTransformer, Bert  # Import your TextTransformer class
 import hydra
 from omegaconf import DictConfig
 import wandb
+import numpy as np
 
 # Function to train for one epoch
 def train_epoch(model, data_loader, optimizer, criterion, device):
