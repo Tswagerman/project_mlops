@@ -14,24 +14,37 @@ from omegaconf import DictConfig
 
 # Initiallize wandb
 wandb.init(project="mlops", entity="team_mlops7")
+#wandb.config = {
+#        "learning_rate": lr,
+#        "epochs": n_epochs,
+#        "batch_size": batch_size,
+#        "embed_dim": embed_dim,
+#    }
 
 # Set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using {device} device.")
+print(torch.cuda.get_device_name(0))
+
+## Main training function
+#@hydra.main(
+#    config_path="config/Bert",
+#    config_name="default_config.yaml",
+#    version_base=None)
 
 datasets = getDatasets()
 train_dataloader = DataLoader(datasets["train"], batch_size=8, shuffle=True) # num_workers=4
 test_dataloader = DataLoader(datasets["test"], batch_size=8, shuffle=False) # num_workers=4
 
-# Define the model
-class FakeRealClassifier(nn.Module):
-    def __init__(self, pretrained_model_name='bert-base-cased', num_labels=2):
-        super(FakeRealClassifier, self).__init__()
-        self.bert = BertForSequenceClassification.from_pretrained(pretrained_model_name, num_labels=num_labels)
-
-    def forward(self, input_ids, attention_mask):
-        output = self.bert(input_ids, attention_mask=attention_mask)
-        return output.logits
+## Define the model
+#class FakeRealClassifier(nn.Module):
+#    def __init__(self, pretrained_model_name='bert-base-cased', num_labels=2):
+#        super(FakeRealClassifier, self).__init__()
+#        self.bert = BertForSequenceClassification.from_pretrained(pretrained_model_name, num_labels=num_labels)
+#
+#    def forward(self, input_ids, attention_mask):
+#        output = self.bert(input_ids, attention_mask=attention_mask)
+#        return output.logits
 
 # Instantiate the model
 model = FakeRealClassifier()

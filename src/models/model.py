@@ -28,7 +28,7 @@ class Network(torch.nn.Module):
     
     
 # Define the model
-class FakeRealClassifier(nn.Module):
+class FakeRealClassifier(torch.nn.Module):
     def __init__(self, pretrained_model_name='bert-base-cased', num_labels=2):
         super(FakeRealClassifier, self).__init__()
         self.bert = BertForSequenceClassification.from_pretrained(pretrained_model_name, num_labels=num_labels)
@@ -41,7 +41,7 @@ class FakeRealClassifier(nn.Module):
     
     
     
-class TextTransformer(nn.Module):
+class TextTransformer(torch.nn.Module):
     def __init__(self, num_heads, num_blocks, embed_dims, vocab_size, max_seq_len, num_classes=2, dropout=0.0):
         super().__init__()
 
@@ -65,7 +65,7 @@ class TextTransformer(nn.Module):
         # Pass through the output layer
         return self.output_layer(x)
                         
-class Attention(nn.Module):
+class Attention(torch.nn.Module):
     def __init__(self, num_heads, embed_dim):
         super(Attention, self).__init__()
 
@@ -117,7 +117,7 @@ class Attention(nn.Module):
         return self.o_projection(out)
 
 
-class EncoderBlock(nn.Module):
+class EncoderBlock(torch.nn.Module):
     def __init__(self, embed_dim, num_heads, fc_hidden_dims=None, dropout=0.0):
         super(EncoderBlock, self).__init__()
 
@@ -158,7 +158,7 @@ class EncoderBlock(nn.Module):
 
         return x
 
-class PositionalEncoding(nn.Module):
+class PositionalEncoding(torch.nn.Module):
     def __init__(self, embed_dim, max_seq_len=512):
         super(PositionalEncoding, self).__init__()
         # Compute the positional encodings once in log space.
