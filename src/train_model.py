@@ -91,6 +91,7 @@ def train():
                 scaler.update()
 
                 scheduler.step()
+                optimizer.step()
                 total_train_loss += loss.item()
                 total_samples += labels.size(0)
 
@@ -139,4 +140,5 @@ def train():
 
 
 if __name__ == '__main__':
-    train()
+    with torch.autograd.profiler.profile(use_cuda=True) as prof:
+        train()
