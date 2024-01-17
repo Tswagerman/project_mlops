@@ -89,7 +89,6 @@ pathspec==0.12.1
 platformdirs==3.11.0
 pluggy==1.3.0
 pre-commit==3.6.0
--e git+https://github.com/Tswagerman/project_mlops@7188f1948b8ea3e56feedc5ccf1e52efd40f9de8#egg=project_mlops
 prompt-toolkit==3.0.43
 protobuf==4.25.1
 psutil==5.9.7

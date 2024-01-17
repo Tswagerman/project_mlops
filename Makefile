@@ -20,7 +20,7 @@ PYTHON_INTERPRETER = python
 requirements:
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
-	$(PYTHON_INTERPRETER) -m pip install -e .
+# $(PYTHON_INTERPRETER) -m pip install -e .
 
 ## Install Developer Python Dependencies
 dev_requirements: requirements

@@ -178,3 +178,5 @@ cython_debug/
 /data
 
 Pipfile
+
+best_model.pth
