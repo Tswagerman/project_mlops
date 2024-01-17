@@ -50,7 +50,6 @@ def train(config):
 
     # Instantiate the model
     model = FakeRealClassifier()
-    #model = TextTransformer(
     model.to(device)
     
     # Define optimizer and scheduler
@@ -73,7 +72,7 @@ def train(config):
 
         # Use tqdm for progress bar
         with tqdm(train_dataloader, desc=f'Epoch {epoch + 1}/{num_epochs}, Training') as train_pbar:
-            for batch in train_pbar:
+            for step, batch in enumerate(train_pbar):
                 input_ids = batch['input_ids'].to(device)
                 attention_mask = batch['attention_mask'].to(device)
                 labels = batch['label'].to(device)
@@ -87,11 +86,12 @@ def train(config):
 
                 scaler.scale(loss).backward()
 
-                scaler.step(optimizer)
-                scaler.update()
+                if (step + 1) % config.accumulation_steps == 0:
+                    scaler.step(optimizer)
+                    scaler.update()
+                    optimizer.zero_grad()
 
                 scheduler.step()
-                optimizer.step()
                 total_train_loss += loss.item()
                 total_samples += labels.size(0)
 
@@ -131,8 +131,8 @@ def train(config):
                     wandb.log({"epoch": epoch + 1, "val_loss": average_val_loss, "val_accuracy": accuracy})
         
         # Save the model if it has the best validation loss
-        if average_val_loss < best_loss:
-            best_loss = average_val_loss
+        if abs(average_val_loss-average_train_loss) < best_loss:
+            best_loss = abs(average_val_loss - average_train_loss)
             torch.save(model.state_dict(), 'models/best_model.pth')
             print("Best model saved!")
 
@@ -140,5 +140,4 @@ def train(config):
 
 
 if __name__ == '__main__':
-    with torch.autograd.profiler.profile(use_cuda=True) as prof:
-        train()
+    train()
