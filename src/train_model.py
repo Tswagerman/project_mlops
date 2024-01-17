@@ -14,19 +14,20 @@ import wandb
 import hydra
 from omegaconf import DictConfig, OmegaConf
 
-#
-#@hydra.main(
-#    config_path="config/ViT_TxtTransfConfig",
-#    config_name="default_config.yaml",
-#    version_base=None,
-#)
-#
-#
-#def train(config):
-#    print(f"configuration: \n {OmegaConf.to_yaml(config)}")
-#    # Unpack hparams
-#    hparams = config["_group_"]  # wtf is this __group__ ?
-def train():    
+
+@hydra.main(
+    config_path="config/ViT_TxtTransfConfig",
+    config_name="default_config.yaml",
+    version_base=None,
+)
+
+
+def train(config):
+    print(f"configuration: \n {OmegaConf.to_yaml(config)}")
+    # Unpack hparams
+    hparams = config["_group_"]  # wtf is this __group__ ?
+
+#def train():    
     # Set device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print('device:', device)
@@ -37,34 +38,32 @@ def train():
     # Initialize wandb
     wandb.init(
     # set the wandb project where this run will be logged
-    project="mlops",
+    project="mlops", entity="team_mlops7",
     )   
 
     mp.set_start_method('spawn')
     datasets = getDatasets()
-    num_workers = 4  # Experiment with different values
+    #num_workers = 4  # Experiment with different values
     
-    train_dataloader = DataLoader(datasets["train"], batch_size=16, shuffle=True, num_workers=num_workers)
-    test_dataloader = DataLoader(datasets["test"], batch_size=16, shuffle=False, num_workers=num_workers)
+    train_dataloader = DataLoader(datasets["train"], batch_size=config.batch_size, shuffle=True, num_workers=config.num_workers)
+    test_dataloader = DataLoader(datasets["test"], batch_size=config.batch_size, shuffle=False, num_workers=config.num_workers)
 
     # Instantiate the model
     model = FakeRealClassifier()
     model.to(device)
     
     # Define optimizer and scheduler
-    optimizer = AdamW(model.parameters(), lr=2e-5)
-    scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=0, num_training_steps=len(train_dataloader) * 10)
-
-    # Training loop
-    num_epochs = 3
-
+    optimizer = AdamW(model.parameters(), lr=config.lr)
+    scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=0, num_training_steps=len(train_dataloader) * config.scheduler_step)
+    
     # Initialize the best validation loss to a high value
     best_loss = float('inf')
 
     # Initialize mixed-precision training
     scaler = GradScaler()
     
-
+    num_epochs = config.n_epochs
+    # Training loop    
     for epoch in range(num_epochs):
         # Training
         model.train()
