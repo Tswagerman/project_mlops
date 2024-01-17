@@ -49,7 +49,7 @@ def train(config):
     test_dataloader = DataLoader(datasets["test"], batch_size=config.batch_size, shuffle=False, num_workers=config.num_workers)
 
     # Instantiate the model
-    #model = FakeRealClassifier()
+    model = FakeRealClassifier()
     #model = TextTransformer(
     model.to(device)
     
