@@ -3,7 +3,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from transformers import  get_linear_schedule_with_warmup
 from torch.optim import AdamW
-from models.model import FakeRealClassifier
+from models.model import FakeRealClassifier, TextTransformer
 from tqdm import tqdm 
 # Ensure you have the necessary libraries installed
 from torch.cuda.amp import autocast, GradScaler
@@ -14,7 +14,7 @@ import wandb
 import hydra
 from omegaconf import DictConfig, OmegaConf
 
-
+# Initialization of Hydra
 @hydra.main(
     config_path="models/config/Bert",
     config_name="default_config.yaml",
@@ -49,7 +49,8 @@ def train(config):
     test_dataloader = DataLoader(datasets["test"], batch_size=config.batch_size, shuffle=False, num_workers=config.num_workers)
 
     # Instantiate the model
-    model = FakeRealClassifier()
+    #model = FakeRealClassifier()
+    #model = TextTransformer(
     model.to(device)
     
     # Define optimizer and scheduler

@@ -72,3 +72,71 @@ def getDatasets():
     test_dataset = CustomDataset(test_df, tokenizer)
 
     return {"train": train_dataset , "test": test_dataset}
+
+#--------------------------
+import torch
+from torch.utils.data import Dataset
+
+class CustomTextDataset(Dataset):
+    def __init__(self, data, vocab, max_length=512):
+        self.data = data
+        self.vocab = vocab
+        self.max_length = max_length
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, index):
+        text = str(self.data.iloc[index]['text'])
+        label = int(self.data.iloc[index]['label'])
+
+        # Encode the text using your custom method
+        encoded_text = self.encode_text(text)
+
+        return {
+            'input_ids': encoded_text,
+            'label': torch.tensor(label, dtype=torch.long)
+        }
+
+    def encode_text(self, text):
+        # Example encoding method: convert each word to an integer based on your custom vocabulary
+        # You might need to tokenize the text first, depending on your vocab structure
+        tokens = text.split()[:self.max_length]  # Tokenize and truncate
+        encoded_text = [self.vocab.get(token, self.vocab['<UNK>']) for token in tokens]
+        
+        # Padding
+        padding_length = self.max_length - len(encoded_text)
+        encoded_text += [self.vocab['<PAD>']] * padding_length
+
+        return torch.tensor(encoded_text, dtype=torch.long)
+    
+#------------------------- 
+from sklearn.model_selection import train_test_split
+from collections import Counter
+
+def build_vocab(texts, max_vocab_size):
+    # Tokenize texts and build vocabulary
+    all_tokens = [token for text in texts for token in text.split()]
+    token_freq = Counter(all_tokens)
+    vocab = {token: idx for idx, (token, _) in enumerate(token_freq.most_common(max_vocab_size))}
+    vocab['<PAD>'] = len(vocab)  # Padding token
+    vocab['<UNK>'] = len(vocab)  # Unknown token
+
+    return vocab
+
+def getDatasets_custom_transformer():
+    df = get_data()
+
+    df['label'] = df['label'].map({'FAKE': 0, 'REAL': 1})
+
+    # Split the data into training and testing sets
+    train_df, test_df = train_test_split(df, test_size=0.2, random_state=42)
+
+    # Build vocabulary from training set
+    vocab = build_vocab(train_df['text'], max_vocab_size=10000)  # Adjust the max_vocab_size as needed
+
+    # Create datasets
+    train_dataset = CustomTextDataset(train_df, vocab, max_length=512)
+    test_dataset = CustomTextDataset(test_df, vocab, max_length=512)
+
+    return {"train": train_dataset, "test": test_dataset}
