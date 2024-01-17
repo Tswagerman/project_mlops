@@ -25,10 +25,6 @@ def train():
     train_dataloader = DataLoader(datasets["train"], batch_size=16, shuffle=True, num_workers=num_workers)
     test_dataloader = DataLoader(datasets["test"], batch_size=16, shuffle=False, num_workers=num_workers)
 
-    
-
-    
-
     # Define optimizer and scheduler
     optimizer = AdamW(model.parameters(), lr=2e-5)
     scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=0, num_training_steps=len(train_dataloader) * 10)
@@ -68,6 +64,7 @@ def train():
                 scaler.update()
 
                 scheduler.step()
+                optimizer.step()
                 total_train_loss += loss.item()
                 total_samples += labels.size(0)
 
@@ -110,4 +107,5 @@ def train():
 
 
 if __name__ == '__main__':
-    train()
+    with torch.autograd.profiler.profile(use_cuda=True) as prof:
+        train()
