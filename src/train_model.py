@@ -16,7 +16,7 @@ from omegaconf import DictConfig, OmegaConf
 
 
 @hydra.main(
-    config_path="config/ViT_TxtTransfConfig",
+    config_path="models/config/Bert",
     config_name="default_config.yaml",
     version_base=None,
 )
@@ -25,7 +25,7 @@ from omegaconf import DictConfig, OmegaConf
 def train(config):
     print(f"configuration: \n {OmegaConf.to_yaml(config)}")
     # Unpack hparams
-    hparams = config["_group_"]  # wtf is this __group__ ?
+    #hparams = config["_group_"]  # wtf is this __group__ ?
 
 #def train():    
     # Set device

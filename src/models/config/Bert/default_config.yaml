@@ -4,7 +4,7 @@
 
 # Training Stable Parameters
 batch_size: 8 # 64
-n_epochs: 10
+n_epochs: 3
 seed: 0
 lr: 0.00002 #2e-5 #0.0001 
 num_workers: 4
@@ -13,5 +13,5 @@ scheduler_step: 3
 #save_per_n_epochs: 1 # Save model every n epochs
 
 
-defaults:
-    - experiment: exp1
+#defaults:
+#    - experiment: exp1
