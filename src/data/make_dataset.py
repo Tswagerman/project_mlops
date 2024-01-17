@@ -1,4 +1,5 @@
 import torch
+<<<<<<< HEAD
 from torchtext.vocab import  Vocab
 from torch.utils.data import DataLoader, Dataset
 from sklearn.model_selection import train_test_split
@@ -18,6 +19,14 @@ torch.manual_seed(SEED)
 torch.backends.cudnn.deterministic = True
 
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+=======
+import os
+import pandas as pd
+import subprocess
+from torch.utils.data import Dataset
+from sklearn.model_selection import train_test_split
+from transformers import BertTokenizer
+>>>>>>> 86231ca83e3cc79df1f93c5ecd35c262f7f0f9fc
 
 def get_dvc_remote_path(remote_name):
     result = subprocess.run(['dvc', 'remote', 'default', remote_name], capture_output=True, text=True)
@@ -38,6 +47,7 @@ def get_data():
     df = pd.read_csv(csv_file_path)
 
     return df
+<<<<<<< HEAD
 
 def custom_standardization(input_data):
     lowercase = input_data.lower()
@@ -135,3 +145,52 @@ for i in range(5):
 
 print("Token frequencies:", token_frequencies)
 #what is going on here?
+=======
+
+# Define the custom dataset
+class CustomDataset(Dataset):
+    def __init__(self, data, tokenizer, max_length=512):
+        self.data = data
+        self.tokenizer = tokenizer
+        self.max_length = max_length
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, index):
+        text = str(self.data.iloc[index]['text'])
+        label = int(self.data.iloc[index]['label'])  # Assuming 'label' is 0 or 1
+
+        encoding = self.tokenizer(
+            text,
+            add_special_tokens=True,
+            max_length=self.max_length,
+            return_token_type_ids=False,
+            padding="max_length",
+            truncation=True,
+            return_attention_mask=True,
+            return_tensors='pt',
+        )
+
+        return {
+            'input_ids': encoding['input_ids'].flatten(),
+            'attention_mask': encoding['attention_mask'].flatten(),
+            'label': torch.tensor(label, dtype=torch.long)
+        }
+
+def getDatasets():
+    df = get_data()
+
+    df['label'] = df['label'].map({'FAKE': 0, 'REAL': 1})
+
+    # Split the data into training and testing sets
+    train_df, test_df = train_test_split(df, test_size=0.2, random_state=42)
+
+    # Tokenizer
+    tokenizer = BertTokenizer.from_pretrained("bert-base-cased")
+    # Create datasets and dataloaders
+    train_dataset = CustomDataset(train_df, tokenizer)
+    test_dataset = CustomDataset(test_df, tokenizer)
+
+    return {"train": train_dataset , "test": test_dataset}
+>>>>>>> 86231ca83e3cc79df1f93c5ecd35c262f7f0f9fc
