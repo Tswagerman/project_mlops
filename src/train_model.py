@@ -5,8 +5,13 @@ from transformers import BertForSequenceClassification, get_linear_schedule_with
 from torch.optim import AdamW
 
 from data.make_dataset import getDatasets
+import wandb
+import random 
 
-
+wandb.init(
+    # set the wandb project where this run will be logged
+    project="mlops",
+)
 datasets = getDatasets()
 train_dataloader = DataLoader(datasets["train"], batch_size=8, shuffle=True)
 test_dataloader = DataLoader(datasets["test"], batch_size=8, shuffle=False)
@@ -36,7 +41,7 @@ scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=0, num_t
 num_epochs = 3
 
 # Initialize the best validation loss to a high value
-best_val_loss = float('inf')
+best_loss = float('inf')
 
 for epoch in range(num_epochs):
     model.train()
@@ -61,6 +66,9 @@ for epoch in range(num_epochs):
     average_train_loss = total_train_loss / total_samples
     print(f'Epoch {epoch + 1}/{num_epochs}, Average Training Loss: {average_train_loss:.4f}')
 
+    # Log training metrics
+    wandb.log({"epoch": epoch + 1, "train_loss": average_train_loss})
+        
     # Validation
     model.eval()
     total_correct = 0
@@ -84,6 +92,10 @@ for epoch in range(num_epochs):
         average_val_loss = total_val_loss / total_samples
         accuracy = total_correct / total_samples
         print(f'Epoch {epoch + 1}/{num_epochs}, Average Validation Loss: {average_val_loss:.4f}, Validation Accuracy: {accuracy:.4f}')
+
+        # Log validation metrics
+        wandb.log({"epoch": epoch + 1, "val_loss": average_val_loss, "val_accuracy": accuracy})
+
 
         # Save the model if it has the best validation loss
         if abs(average_val_loss - average_train_loss) < best_loss:
