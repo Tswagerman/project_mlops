@@ -3,18 +3,25 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from transformers import BertForSequenceClassification, get_linear_schedule_with_warmup
 from torch.optim import AdamW
-
+from models.model import FakeRealClassifier, TextTransformer
 from data.make_dataset import getDatasets
 import wandb
 import random 
 
-wandb.init(
-    # set the wandb project where this run will be logged
-    project="mlops",
-)
+import hydra
+from omegaconf import DictConfig
+
+
+# Initiallize wandb
+wandb.init(project="mlops", entity="team_mlops7")
+
+# Set device
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Using {device} device.")
+
 datasets = getDatasets()
-train_dataloader = DataLoader(datasets["train"], batch_size=8, shuffle=True)
-test_dataloader = DataLoader(datasets["test"], batch_size=8, shuffle=False)
+train_dataloader = DataLoader(datasets["train"], batch_size=8, shuffle=True) # num_workers=4
+test_dataloader = DataLoader(datasets["test"], batch_size=8, shuffle=False) # num_workers=4
 
 # Define the model
 class FakeRealClassifier(nn.Module):
@@ -30,7 +37,8 @@ class FakeRealClassifier(nn.Module):
 model = FakeRealClassifier()
 
 # Set device
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+#device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+#print(f"Using {device} device.")
 model.to(device)
 
 # Define optimizer and scheduler
