@@ -10,25 +10,47 @@ from torch.cuda.amp import autocast, GradScaler
 import torch.multiprocessing as mp
 
 from data.make_dataset import getDatasets
+import wandb
+import hydra
+from omegaconf import DictConfig, OmegaConf
 
-
-def train():
-     # Set device
+#
+#@hydra.main(
+#    config_path="config/ViT_TxtTransfConfig",
+#    config_name="default_config.yaml",
+#    version_base=None,
+#)
+#
+#
+#def train(config):
+#    print(f"configuration: \n {OmegaConf.to_yaml(config)}")
+#    # Unpack hparams
+#    hparams = config["_group_"]  # wtf is this __group__ ?
+def train():    
+    # Set device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    # Instantiate the model
-    model = FakeRealClassifier()
-    model.to(device)
+    print('device:', device)
+    # print name of the device
+    print(torch.cuda.get_device_name(0))
+    
+    
+    # Initialize wandb
+    wandb.init(
+    # set the wandb project where this run will be logged
+    project="mlops",
+    )   
 
     mp.set_start_method('spawn')
     datasets = getDatasets()
     num_workers = 4  # Experiment with different values
+    
     train_dataloader = DataLoader(datasets["train"], batch_size=16, shuffle=True, num_workers=num_workers)
     test_dataloader = DataLoader(datasets["test"], batch_size=16, shuffle=False, num_workers=num_workers)
 
+    # Instantiate the model
+    model = FakeRealClassifier()
+    model.to(device)
     
-
-    
-
     # Define optimizer and scheduler
     optimizer = AdamW(model.parameters(), lr=2e-5)
     scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=0, num_training_steps=len(train_dataloader) * 10)
@@ -41,6 +63,7 @@ def train():
 
     # Initialize mixed-precision training
     scaler = GradScaler()
+    
 
     for epoch in range(num_epochs):
         # Training
@@ -73,6 +96,9 @@ def train():
 
                 average_train_loss = total_train_loss / total_samples
                 train_pbar.set_postfix({'Loss': average_train_loss})
+                
+                # Log training metrics
+                wandb.log({"epoch": epoch + 1, "train_loss": average_train_loss})
 
         # Validation
         model.eval()
@@ -99,6 +125,9 @@ def train():
                     average_val_loss = total_val_loss / total_samples
                     accuracy = total_correct / total_samples
                     val_pbar.set_postfix({'Loss': average_val_loss, 'Accuracy': accuracy})
+                    
+                    # Log validation metrics
+                    wandb.log({"epoch": epoch + 1, "val_loss": average_val_loss, "val_accuracy": accuracy})
         
         # Save the model if it has the best validation loss
         if average_val_loss < best_loss:
