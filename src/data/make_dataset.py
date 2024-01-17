@@ -61,13 +61,17 @@ def get_data() -> pd.DataFrame:
     # Load the CSV file into a Pandas DataFrame
     csv_file_path = os.path.join(dvc_remote_path, 'data/raw/news.csv')  # Adjust the path to your CSV file
     df = pd.read_csv(csv_file_path)
+    print(df.columns)
     
     df['text'] = df['text'].astype(str)
     df.dropna(inplace=True)
     df['label'] = df['label'].replace('REAL', '0')
     df['label'] = df['label'].replace('FAKE', '1')
     # Changing the datatype of label column to int32
-    df['label'] = df['label'].astype('float64').to_numpy()
+    # Convert labels to a list of integers
+    df['label'] = df['label'].astype('int32').tolist()
+    print("labels = ", df['label'].values , "label type = ", type(df['label'].values ))
+
     df.drop(columns=['title'], inplace=True)
     df.drop(columns=['Unnamed: 0'], inplace=True)
 
