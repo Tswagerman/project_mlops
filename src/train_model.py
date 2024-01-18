@@ -32,7 +32,9 @@ def train(config):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print('device:', device)
     # print name of the device
-    print(torch.cuda.get_device_name(0))
+    # write code if device.type == 'cuda':
+    if device.type == 'cuda':
+        print(torch.cuda.get_device_name(0))
     
     
     # Initialize wandb
