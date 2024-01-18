@@ -217,3 +217,4 @@ wrapt==1.16.0
 xmod==1.8.1
 yarl==1.9.4
 zc.lockfile==3.0.post1
+einops==0.7.0
