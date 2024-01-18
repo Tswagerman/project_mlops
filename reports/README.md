@@ -210,8 +210,9 @@ No
 
 > **Discuss the overall struggles of the project. Where did you spend most time and what did you do to overcome these**
 > **challenges?**
+
 Understanding the benefits and qualities of all of the services we were taught about and being able to implement them in our project was challenging enough. Google cloud was one of the difficulties for sure since it includes the manipulation of different tools.
-Additionally,.............
+Additionally,The learning material on the slides proved very helpful for us along with searching stuff online and AI tools such as chatGPT. Overall although it was a struggle we consider this project one of the most complete and "professional" projects we have done so far.
 
 ### Question 27
 
