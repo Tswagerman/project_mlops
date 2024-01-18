@@ -1,10 +1,14 @@
 
 import torch
 import torch.nn as nn
+import os
 from torch.optim import AdamW
 from transformers import BertTokenizer
 from torch.nn.functional import softmax
 from transformers import BertTokenizer, BertForSequenceClassification
+
+# Get the current working directory
+current_directory = os.getcwd()
 
 def predict(
     model: torch.nn.Module,
@@ -34,8 +38,8 @@ class FakeRealClassifier(nn.Module):
     
 # Load the saved model
 model = FakeRealClassifier()  # Assuming you have defined the model architecture
-
-model.load_state_dict(torch.load('C:\\Users\\Thoma\\MLops\\project_mlops\\models\\best_model.pth', map_location=torch.device('cpu')))
+model_path = os.path.join(current_directory, 'models', 'best_model.pth')
+model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
 
 model.eval()
 

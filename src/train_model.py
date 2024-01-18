@@ -8,6 +8,7 @@ from tqdm import tqdm
 # Ensure you have the necessary libraries installed
 from torch.cuda.amp import autocast, GradScaler
 import torch.multiprocessing as mp
+import os
 
 from data.make_dataset import getDatasets
 import wandb
@@ -20,7 +21,6 @@ from omegaconf import DictConfig, OmegaConf
     config_name="default_config.yaml",
     version_base=None,
 )
-
 
 def train(config):
     print(f"configuration: \n {OmegaConf.to_yaml(config)}")
@@ -38,9 +38,10 @@ def train(config):
     
     
     # Initialize wandb
+    os.environ["WANDB_API_KEY"] = config.wandbAPI
     wandb.init(
     # set the wandb project where this run will be logged
-    project="mlops", entity="team_mlops7",
+    project="mlops", entity="team_mlops7", 
     )   
 
     mp.set_start_method('spawn')

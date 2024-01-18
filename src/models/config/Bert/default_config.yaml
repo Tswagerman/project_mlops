@@ -10,6 +10,7 @@ lr: 0.00002 #2e-5 #0.0001
 num_workers: 4
 scheduler_step: 3  
 accumulation_steps: 1 
+wandbAPI: 80ea83cfdd37762205e46cf8ec53ce49fb040e26
 
 #save_per_n_epochs: 1 # Save model every n epochs
 
