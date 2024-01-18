@@ -51,6 +51,7 @@ In the rest of the folders, resulting models, logs, tests and texts can be found
 ### Question 6
 > **Did you implement any rules for code quality and format? Additionally, explain with your own words why these**
 > **concepts matters in larger projects.**
+
 We followed PEP8 coding practice mostly on our src files covering areas such as indentation, line length, imports, whitespace, comments, and naming conventions, ensuring that Python code is readable and consistent. In addition, we used ruff as a linter to identify syntactical and stylish problems in our src files. By writing our code in this way we ensured that the quality and readability of the code will remain high throughout the whole process.
 
 ## Version control
@@ -61,6 +62,7 @@ We followed PEP8 coding practice mostly on our src files covering areas such as 
 ### Question 7
 
 > **How many tests did you implement?**
+
 Yes, 5 for the data and 5 for the training 
 
 
@@ -76,6 +78,7 @@ Having coverage of 100% indicates a well-tested codebase, but it does not necess
 
 > **Did your workflow include using branches and pull requests? If yes, explain how. If not, explain how branches and**
 > **pull request can help improve version control.**
+
 Yes, we had a repository on github and everyone had their own branch they worked on. Whenever anyone felt they had some working code that would improve the project, they merged it with the master branch.
 
 ### Question 10
@@ -102,12 +105,14 @@ We ended up using pytest to perform unit tests to our codebase and ruff as a lin
 
 > **How did you configure experiments? Did you make use of config files? Explain with coding examples of how you would**
 > **run a experiment.**
+
 Yes, hydra package was used and thus a config folder was made including different experiment yaml files along with a default one. Hyperparameters such as epochs, learning rate and scheduler_steps were included in those.
 
 ### Question 13
 
 > **Reproducibility of experiments are important. Related to the last question, how did you secure that no information**
 > **is lost when running experiments and that your experiments are reproducible?**
+
 We used wandb to keep track of our experiments, plots etc. And hydra to keep track of our experimental params.
 
 ### Question 14
@@ -123,6 +128,7 @@ This image indicates the type of tests we did using Wandb [this figure](figures/
 
 > **Docker is an important tool for creating containerized applications. Explain how you used docker in your**
 > **experiments? Include how you would run your docker images and include a link to one of your docker files.**
+
 We created three dockerfiles. One to run the same command as make train does, one to run the same command as make evaluate does and then we created a dockerfile that deploys our website with the availability of evaluation of text. run it by running docker run -p 8000:80 fastapi:latest after building it using docker build -f fastapi.dockerfile . -t fastapi:latest. The dockerfiles can be found in the dockerfiles folder.
 
 ### Question 16
