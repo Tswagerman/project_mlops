@@ -22,7 +22,19 @@ from omegaconf import DictConfig, OmegaConf
     version_base=None,
 )
 
+
 def train(config):
+
+
+    if not config: 
+        raise Exception("Configuration dictionary should not be empty!")
+    
+    if config['num_workers'] <0 :
+        raise Exception("Number of workers cannot be negative")
+    
+    if config['n_epochs'] <=0 :
+        raise Exception("Number of epochs cannot be zero or negative")
+    
     print(f"configuration: \n {OmegaConf.to_yaml(config)}")
     # Unpack hparams
     #hparams = config["_group_"]  # wtf is this __group__ ?
@@ -41,23 +53,23 @@ def train(config):
     os.environ["WANDB_API_KEY"] = config.wandbAPI
     wandb.init(
     # set the wandb project where this run will be logged
-    project="mlops", entity="team_mlops7", 
+    project="mlops", entity="team_mlops7",
     )   
 
     mp.set_start_method('spawn')
     datasets = getDatasets()
     #num_workers = 4  # Experiment with different values
     
-    train_dataloader = DataLoader(datasets["train"], batch_size=config.batch_size, shuffle=True, num_workers=config.num_workers)
-    test_dataloader = DataLoader(datasets["test"], batch_size=config.batch_size, shuffle=False, num_workers=config.num_workers)
+    train_dataloader = DataLoader(datasets["train"], batch_size=config['batch_size'], shuffle=True, num_workers=config['num_workers'])
+    test_dataloader = DataLoader(datasets["test"], batch_size=config['batch_size'], shuffle=False, num_workers=config['num_workers'])
 
     # Instantiate the model
     model = FakeRealClassifier()
     model.to(device)
     
     # Define optimizer and scheduler
-    optimizer = AdamW(model.parameters(), lr=config.lr)
-    scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=0, num_training_steps=len(train_dataloader) * config.scheduler_step)
+    optimizer = AdamW(model.parameters(), lr=config['lr'])
+    scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=0, num_training_steps=len(train_dataloader) * config['scheduler_step'])
     
     # Initialize the best validation loss to a high value
     best_loss = float('inf')
@@ -65,7 +77,7 @@ def train(config):
     # Initialize mixed-precision training
     scaler = GradScaler()
     
-    num_epochs = config.n_epochs
+    num_epochs = config['n_epochs']
     # Training loop    
     for epoch in range(num_epochs):
         # Training
@@ -89,7 +101,7 @@ def train(config):
 
                 scaler.scale(loss).backward()
 
-                if (step + 1) % config.accumulation_steps == 0:
+                if (step + 1) % config['accumulation_steps'] == 0:
                     scaler.step(optimizer)
                     scaler.update()
                     optimizer.zero_grad()

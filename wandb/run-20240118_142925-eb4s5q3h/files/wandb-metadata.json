@@ -1,0 +1,54 @@
+{
+    "os": "Windows-10-10.0.22621-SP0",
+    "python": "3.11.6",
+    "heartbeatAt": "2024-01-18T13:29:26.337253",
+    "startedAt": "2024-01-18T13:29:25.363101",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "tests"
+    ],
+    "state": "running",
+    "program": "-m __main__",
+    "codePathLocal": null,
+    "git": {
+        "remote": "https://github.com/Tswagerman/project_mlops.git",
+        "commit": "f7ad5c007ec833176a67460afc3a02208ad160cc"
+    },
+    "email": "george.stamatopoulos1998@gmail.com",
+    "root": "C:/Users/stamg/Desktop/project_mlops",
+    "host": "stam21",
+    "username": "stamg",
+    "executable": "C:\\Users\\stamg\\.virtualenvs\\project_mlops-cO1L_Ix9\\Scripts\\python.exe",
+    "cpu_count": 12,
+    "cpu_count_logical": 24,
+    "cpu_freq": {
+        "current": 3001.0,
+        "min": 0.0,
+        "max": 3001.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3001.0,
+            "min": 0.0,
+            "max": 3001.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 451.6331214904785,
+            "used": 208.0396614074707
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+            "memory_total": 8585740288
+        }
+    ],
+    "memory": {
+        "total": 15.213157653808594
+    }
+}
