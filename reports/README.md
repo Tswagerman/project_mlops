@@ -232,9 +232,12 @@ Additionally,The learning material on the slides proved very helpful for us alon
 > **make sure all members contributed actively to the project**
 
 s222977: I was responsible for DVC, Docker, and FastAPI, and kicked off the GitHub repository with Cookiecutter.
+>
 s230250: I was in charge of the correct data impelmentation/tokenization in order to feed the model and write unit tests for the dataset.
+>
 s230251: My responsibility was to write unit tests, ensure ruff is not complaining for our code and optimize the training process of the model.
-s222948:
+>
+s222948: I was responsible for Wandb and Hydra along with the transformation of the code and also experimented with the Google Cloud Services
 
 Everyone contributed to everything, with people being responsible for different parts of the project.
 >>>>>>> 9a348b0162ab0f56881a8e7e5c15eef1eaaeb2c
