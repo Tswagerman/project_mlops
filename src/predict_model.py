@@ -1,32 +1,27 @@
-
+import os
 import torch
 import torch.nn as nn
-import os
 from torch.optim import AdamW
-from transformers import BertTokenizer
-from torch.nn.functional import softmax
 from transformers import BertTokenizer, BertForSequenceClassification
+
 
 # Get the current working directory
 current_directory = os.getcwd()
 
-def predict(
-    model: torch.nn.Module,
-    dataloader: torch.utils.data.DataLoader
-) -> None:
-    """Run prediction for a given model and dataloader.
-    
-    Args:
-        model: model to use for prediction
-        dataloader: dataloader with batches
-    
-    Returns
-        Tensor of shape [N, d] where N is the number of samples and d is the output dimension of the model
 
+def predict(model: torch.nn.Module, dataloader: torch.utils.data.DataLoader) -> torch.Tensor:
+    """Run prediction for a given model and dataloader.
+
+    Args:
+        model: Model to use for prediction.
+        dataloader: Dataloader with batches.
+
+    Returns:
+        Tensor of shape [N, d] where N is the number of samples and d is the output dimension of the model.
     """
     return torch.cat([model(batch) for batch in dataloader], 0)
 
-# Define the model
+
 class FakeRealClassifier(nn.Module):
     def __init__(self, pretrained_model_name='bert-base-cased', num_labels=2):
         super(FakeRealClassifier, self).__init__()
@@ -35,33 +30,34 @@ class FakeRealClassifier(nn.Module):
     def forward(self, input_ids, attention_mask):
         output = self.bert(input_ids, attention_mask=attention_mask)
         return output.logits
-    
-# Load the saved model
-model = FakeRealClassifier()  # Assuming you have defined the model architecture
-model_path = os.path.join(current_directory, 'models', 'best_model.pth')
-model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
 
+
+# Load the saved model
+model_path = os.path.join(current_directory, 'models', 'best_model.pth')
+model = FakeRealClassifier()
+model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
 model.eval()
 
-# Tokenizer
+# Initialize tokenizer
 tokenizer = BertTokenizer.from_pretrained("bert-base-cased")
 
-# Function to predict the class for a given text
-def predict_fake_real(text):
-    # Tokenize the input text
-    inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True)
 
-    # Make the prediction
+def predict_fake_real(text):
+    """Predict if the given text is fake or real.
+
+    Args:
+        text: The text to classify.
+
+    Returns:
+        Tuple of predicted class and confidence.
+    """
+    inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True)
     with torch.no_grad():
         logits = model(inputs["input_ids"], inputs["attention_mask"])
-
-    # Apply softmax to get probabilities
-    probabilities = softmax(logits, dim=1)
-
-    # Get the predicted class (0 for fake, 1 for real)
+    probabilities = torch.nn.functional.softmax(logits, dim=1)
     predicted_class = torch.argmax(probabilities).item()
-
     return predicted_class, probabilities[0][predicted_class].item()
+
 
 # Example usage
 text_to_predict = '''You Can Smell Hillary’s Fear,"Daniel Greenfield, a Shillman Journalism Fellow at the Freedom Center, is a New York writer focusing on radical Islam. 
@@ -98,7 +94,7 @@ The campaign against Comey is pure intimidation. It’s also a warning. Any seni
 Hillary Clinton has awkwardly wound her way through numerous scandals in just this election cycle. But she’s never shown fear or desperation before. Now that has changed. Whatever she is afraid of, it lies buried in her emails with Huma Abedin. And it can bring her down like nothing else has.  "'''
 predicted_class, confidence = predict_fake_real(text_to_predict)
 
-# Print the results
+# Output results
 if predicted_class == 0:
     print(f"The text is predicted as FAKE with confidence {confidence:.2%}")
 else:
