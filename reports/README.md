@@ -43,6 +43,7 @@ The project was implemented both in Google Cloud VM and both on the HPC of the D
 
 > **We expect that you initialized your project using the cookiecutter template. Explain the overall structure of your**
 > **code. Did you fill out every folder or only a subset?**
+
 All in all we have covered most of the folders of the template excluding only the 'notebook' and the 'visualization' folder(which was replaced with the corresponding wandb folder).
 In the 'src' folder, we have implemented most of our main code in corresponding subfolders including 'predict_model.py' and 'train_model.py'. Specifically, the first includes code relative to evaluation processes while the latter includes the training loop. The 'model.py' and config files were included in the 'models' subfolder and the 'make_dataset.py' in the 'data' subfolder.
 In the rest of the folders, resulting models, logs, tests and texts can be found.
