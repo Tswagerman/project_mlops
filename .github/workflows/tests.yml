@@ -27,7 +27,8 @@ jobs:
       run: |
         pip install pytest
         pip install dvc "dvc[gdrive]"
-        rm -r .dvc/cache
-        dvc fetch
-        dvc pull
+        rm -r .dvc
+        dvc init
+        dvc remote add -d public-remote gdrive://1X2P4EfkFSkOlSrUg8ugygr5blUvGojsE
+        git fetch
         pytest -v
