@@ -27,5 +27,7 @@ jobs:
       run: |
         pip install pytest
         pip install dvc "dvc[gdrive]"
+        rm -r .dvc/cache
+        dvc fetch
         dvc pull
         pytest -v
