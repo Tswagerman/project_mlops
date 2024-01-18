@@ -187,12 +187,14 @@ Data of our project is here, [this figure](figures/buckert.png)
 
 > **Did you manage to deploy your model, either in locally or cloud? If not, describe why. If yes, describe how and**
 > **preferably how you invoke your deployed service?**
-We were able to deploy our model both locally and in the hpc of DTU. Using hpc was easier for now and provided enough perks to make to proceedure easier.
+> 
+We were able to deploy our model both locally and in the hpc of DTU. Using hpc was easier for now and provided enough perks to make to procedure easier. Deploying the model in GCP was not accomplished because multiple errors could not be skipped.
 
 ### Question 23
 
 > **Did you manage to implement monitoring of your deployed model? If yes, explain how it works. If not, explain how**
 > **monitoring would help the longevity of your application.**
+> 
 No
 
 ### Question 24
