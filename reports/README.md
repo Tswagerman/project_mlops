@@ -151,14 +151,15 @@ While training the model, the profiler offered by pytorch was proven helpful eno
 > Example:
 > *We used the following two services: Engine and Bucket. Engine is used for... and Bucket is used for...*
 >
-> Answer: We mainly tried to understand the qualities of the gcp cloud and thus we uploaded our data and project to gcp using 
-Buckets from Cloud Storage. Moreover, we used Compute Engine to create VMs bot using our docker image and using a provided one from gcp inlcuding cuda support.
+We mainly tried to understand the qualities of the GCP initially uploaded our data and project using Buckets from Cloud Storage which are mainly used to store data. Moreover, we used Compute Engine to create VMs both using our own docker image and using a provided one from GCP that includes necessary packages like torch. Additionally, we used Container Registry and tried to take advantage of Cloud Run in order to store and deploy our container images from the cloud.
 
 ### Question 18
 
 > **The backbone of GCP is the Compute engine. Explained how you made use of this service and what type of VMs**
 > **you used?**
-By initializing instances in Compute Engine we were able to create VM's that we could access from whatever laptop/pc we might had. So instead of using our own machine we too advantage of the ones available in gcp. Even though we created gpu based instances, we ended up using a cpu-based one.
+By initializing instances in Compute Engine we were able to create VM's that we could access from whatever laptop/pc we might had. So instead of using our own machine we took advantage of the ones available in gcp. Even though we created both gpu and cpu based instances, we didn't end up using them for the most of the project.
+
+
 ### Question 19
 
 > **Insert 1-2 images of your GCP bucket, such that we can see what data you have stored in it.**
