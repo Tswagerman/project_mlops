@@ -200,6 +200,8 @@ No
 ### Question 24
 
 > **How many credits did you end up using during the project and what service was most expensive?**
+>
+> Around 30 dollars were spend, [this figure](figures/spent.png)
 
 
 ## Overall discussion of project
@@ -211,7 +213,8 @@ No
 > **Include a figure that describes the overall architecture of your system and what services that you make use of.**
 > **You can take inspiration from [this figure](figures/overview.png). Additionally in your own words, explain the**
 > **overall steps in figure.**
-
+>
+> Architecture [this figure](figures/overview_modded.png)
 
 
 
