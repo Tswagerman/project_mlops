@@ -1,0 +1,8 @@
+batch_size: 4
+n_epochs: 3
+seed: 0
+lr: 2.0e-05
+num_workers: 4
+scheduler_step: 3
+accumulation_steps: 1
+wandbAPI: 80ea83cfdd37762205e46cf8ec53ce49fb040e26

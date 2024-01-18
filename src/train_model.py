@@ -21,7 +21,8 @@ from omegaconf import DictConfig, OmegaConf
     config_name="default_config.yaml",
     version_base=None,
 )
-def train(config):
+
+def train(config, test=False):
     if not config:
         raise ValueError("Configuration dictionary should not be empty!")
 
@@ -40,11 +41,15 @@ def train(config):
         print(torch.cuda.get_device_name(0))
 
     # Initialize wandb
-    os.environ["WANDB_API_KEY"] = config.wandbAPI
+    os.environ["WANDB_API_KEY"] = config['wandbAPI']
     wandb.init(project="mlops", entity="team_mlops7")
     
 
-    mp.set_start_method('spawn')
+    current_start_method = mp.get_start_method()
+    
+    if current_start_method != 'spawn':
+        mp.set_start_method('spawn')
+        
     datasets = getDatasets()
 
     train_dataloader = DataLoader(
@@ -77,7 +82,6 @@ def train(config):
     # Initialize mixed-precision training
     scaler = GradScaler()
     
-    num_epochs = config['n_epochs']
         # Training loop
     for epoch in range(config['n_epochs']):
         model.train()
@@ -146,7 +150,7 @@ def train(config):
                     wandb.log({"epoch": epoch + 1, "val_loss": average_val_loss, "val_accuracy": accuracy})
         
         # Model saving based on validation loss
-        if abs(average_val_loss-average_train_loss) < best_loss:
+        if abs(average_val_loss-average_train_loss) < best_loss and not test:
             best_loss = abs(average_val_loss - average_train_loss)
             torch.save(model.state_dict(), 'models/best_model.pth')
             print("Best model saved!")
