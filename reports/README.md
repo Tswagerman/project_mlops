@@ -115,6 +115,7 @@ We used wandb to keep track of our experiments, plots etc. And hydra to keep tra
 > **inspiration from [this figure](figures/wandb.png). Explain what metrics you are tracking and why they are**
 > **important.**
 
+This image indicates the type of tests we did using Wandb [this figure](figures/wandb_team7.png)
 
 ### Question 15
 
