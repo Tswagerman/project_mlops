@@ -50,7 +50,7 @@ In the rest of the folders, resulting models, logs, tests and texts can be found
 ### Question 6
 > **Did you implement any rules for code quality and format? Additionally, explain with your own words why these**
 > **concepts matters in larger projects.**
-We followed PEP8 coding practice mostly on our src files covering areas such as indentation, line length, imports, whitespace, comments, and naming conventions, ensuring that Python code is readable and consistent.
+We followed PEP8 coding practice mostly on our src files covering areas such as indentation, line length, imports, whitespace, comments, and naming conventions, ensuring that Python code is readable and consistent. In addition, we used ruff as a linter to identify syntactical and stylish problems in our src files. By writing our code in this way we ensured that the quality and readability of the code will remain high throughout the whole process.
 
 ## Version control
 
@@ -90,6 +90,7 @@ We did, we had one csv file with text of around 6000 articles. It isn't a big fi
 > **multiple operating systems, python version etc. Do you make use of caching? Feel free to insert a link to one of**
 > **your github actions workflow.**
 
+We ended up using pytest to perform unit tests to our codebase and ruff as a linter to highlight syntactical and stylistic problems. We performed several tests for the training process, fetching of the data and the creation of the datasets. We used caching for composing the various docker images.
 
 ## Running code and tracking experiments
 
@@ -128,7 +129,7 @@ We created three dockerfiles. One to run the same command as make train does, on
 > **When running into bugs while trying to run your experiments, how did you perform debugging? Additionally, did you**
 > **try to profile your code or do you think it is already perfect?**
 
-
+While training the model, the profiler offered by pytorch was proven helpful enough to identify problems in the code and helped us optimize it. In addition, we used the debugger from visual studio code to insert breakpoints and examine certain behaviours. While testing, logging the errors helped us understand the reason the failures occured, but also pytest was proven helpful with its error logs. 
 
 ## Working in the cloud
 
@@ -212,7 +213,7 @@ Additionally,.............
 
 s222977: I was responsible for DVC, Docker, and FastAPI, and kicked off the GitHub repository with Cookiecutter.
 s230250:
-s230251:
+s230251: My responsibility was to write unit tests, ensure ruff is not complaining for our code and optimize the training process of the model.
 s222948:
 
 Everyone contributed to everything, with people being responsible for different parts of the project.

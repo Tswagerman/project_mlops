@@ -85,7 +85,7 @@ def train(config):
         total_samples = 0
 
         # Progress bar for training
-        with tqdm(train_dataloader, desc=f'Epoch {epoch + 1}/{config['n_epochs']}, Training') as train_pbar:
+        with tqdm(train_dataloader, desc=f'Epoch {epoch + 1}/{config["n_epochs"]}, Training') as train_pbar:
             for step, batch in enumerate(train_pbar):
                 # Prepare batch data
                 input_ids = batch['input_ids'].to(device)
@@ -122,7 +122,7 @@ def train(config):
         total_val_loss = 0.0
 
         # Progress bar for validation
-        with tqdm(test_dataloader, desc=f'Epoch {epoch + 1}/{config['n_epochs']}, Validation') as val_pbar:
+        with tqdm(test_dataloader, desc=f'Epoch {epoch + 1}/{config["n_epochs"]}, Validation') as val_pbar:
             with torch.no_grad():
                 for batch in val_pbar:
                     # Prepare batch data
