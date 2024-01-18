@@ -165,6 +165,8 @@ By initializing instances in Compute Engine we were able to create VM's that we 
 
 > **Insert 1-2 images of your GCP bucket, such that we can see what data you have stored in it.**
 > **You can take inspiration from [this figure](figures/bucket.png).**
+> 
+Data of our project is here, [this figure](figures/buckert.png)
 
 
 ### Question 20
