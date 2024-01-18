@@ -210,5 +210,10 @@ Additionally,.............
 > **State the individual contributions of each team member. This is required information from DTU, because we need to**
 > **make sure all members contributed actively to the project**
 
+s222977: I was responsible for DVC, Docker, and FastAPI, and kicked off the GitHub repository with Cookiecutter.
+s230250:
+s230251:
+s222948:
 
+Everyone contributed to everything, with people being responsible for different parts of the project.
 >>>>>>> 9a348b0162ab0f56881a8e7e5c15eef1eaaeb2c
