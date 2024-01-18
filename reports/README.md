@@ -68,6 +68,7 @@ In the rest of the folders, resulting models, logs, tests and texts can be found
 > **What is the total code coverage (in percentage) of your code? If you code had an code coverage of 100% (or close**
 > **to), would you still trust it to be error free? Explain you reasoning.**
 
+Having coverage of 100% indicates a well-tested codebase, but it does not necessarily mean that the code is error-free since it only measures the percentage of code that is executed by the tests and it doesn't guarantee that every possible use case or input scenario has been tested.
 
 ### Question 9
 
@@ -103,8 +104,7 @@ Yes, hydra package was used and thus a config folder was made including differen
 
 > **Reproducibility of experiments are important. Related to the last question, how did you secure that no information**
 > **is lost when running experiments and that your experiments are reproducible?**
-
-
+We took advantage of Docker that,
 
 ### Question 14
 
@@ -147,8 +147,7 @@ Buckets from Cloud Storage. Moreover, we used Compute Engine to create VMs bot u
 
 > **The backbone of GCP is the Compute engine. Explained how you made use of this service and what type of VMs**
 > **you used?**
-
-
+By initializing instances in Compute Engine we were able to create VM's that we could access from whatever laptop/pc we might had. So instead of using our own machine we too advantage of the ones available in gcp. Even though we created gpu based instances, we ended up using a cpu-based one.
 ### Question 19
 
 > **Insert 1-2 images of your GCP bucket, such that we can see what data you have stored in it.**
@@ -176,7 +175,8 @@ We were able to deploy our model both locally and in the hpc of DTU. Using hpc w
 
 > **Did you manage to implement monitoring of your deployed model? If yes, explain how it works. If not, explain how**
 > **monitoring would help the longevity of your application.**
-Wandb??
+No
+
 ### Question 24
 
 > **How many credits did you end up using during the project and what service was most expensive?**
