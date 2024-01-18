@@ -1,0 +1,7 @@
+batch_size: 8
+n_epochs: 3
+seed: 0
+lr: 0.002
+num_workers: 4
+scheduler_step: 3
+accumulation_steps: 2

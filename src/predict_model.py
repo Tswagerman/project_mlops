@@ -24,7 +24,7 @@ def predict(
 
 # Define the model
 class FakeRealClassifier(nn.Module):
-    def __init__(self, pretrained_model_name='bert-base-uncased', num_labels=2):
+    def __init__(self, pretrained_model_name='bert-base-cased', num_labels=2):
         super(FakeRealClassifier, self).__init__()
         self.bert = BertForSequenceClassification.from_pretrained(pretrained_model_name, num_labels=num_labels)
 
@@ -35,12 +35,12 @@ class FakeRealClassifier(nn.Module):
 # Load the saved model
 model = FakeRealClassifier()  # Assuming you have defined the model architecture
 
-model.load_state_dict(torch.load('C:\\Users\\stamg\\Desktop\\project_mlops\\models\\best_model.pth', map_location=torch.device('cpu')))
+model.load_state_dict(torch.load('C:\\Users\\Thoma\\MLops\\project_mlops\\models\\best_model.pth', map_location=torch.device('cpu')))
 
 model.eval()
 
 # Tokenizer
-tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
+tokenizer = BertTokenizer.from_pretrained("bert-base-cased")
 
 # Function to predict the class for a given text
 def predict_fake_real(text):
