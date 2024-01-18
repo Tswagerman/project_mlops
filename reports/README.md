@@ -15,7 +15,7 @@ nav_exclude: true
 ### Question 2
 > **Enter the study number for each member in the group**
 
-s222977, s230250, s230251, 
+s222977, s230250, s230251, s222948
 
 ### Question 3
 > **What framework did you choose to work with and did it help you complete the project?**
@@ -32,11 +32,10 @@ We used pytorch to train the Bert pre-trained network from hugging-face.
 > **through to get an exact copy of your environment.**
 
 We used dvc to always fetch the same data file from the google drive. The data is a small csv file containing the text and label of around 6000 articles.
-Docker is used to create a container of our environemnt both for training and evaluating. 
-docker build -f trainer.dockerfile . -t trainer:latest
-docker run trainer
-docker build -f evaluate.dockerfile . -t evaluate:latest
-docker run evaluate
+Docker is used to create a container to deploy our website.
+docker build -f fastapi.dockerfile . -t fastapi:latest
+docker run -p 8000:80 fastapi:latest
+
 
 The project was implemented both in Google Cloud VM and both on the HPC of the DTU.
 
@@ -48,6 +47,7 @@ All in all we have covered most of the folders of the template excluding only th
 In the 'src' folder, we have implemented most of our main code in corresponding subfolders including 'predict_model.py' and 'train_model.py'. Specifically, the first includes code relative to evaluation processes while the latter includes the training loop. The 'model.py' and config files were included in the 'models' subfolder and the 'make_dataset.py' in the 'data' subfolder.
 In the rest of the folders, resulting models, logs, tests and texts can be found.
 
+### Question 6
 > **Did you implement any rules for code quality and format? Additionally, explain with your own words why these**
 > **concepts matters in larger projects.**
 We followed PEP8 coding practice mostly on our src files covering areas such as indentation, line length, imports, whitespace, comments, and naming conventions, ensuring that Python code is readable and consistent.
@@ -75,13 +75,14 @@ Having coverage of 100% indicates a well-tested codebase, but it does not necess
 
 > **Did your workflow include using branches and pull requests? If yes, explain how. If not, explain how branches and**
 > **pull request can help improve version control.**
-??
+Yes, we had a repository on github and everyone had their own branch they worked on. Whenever anyone felt they had some working code that would improve the project, they merged it with the master branch.
 
 ### Question 10
 
 > **Did you use DVC for managing data in your project? If yes, then how did it improve your project to have version**
 > **control of your data. If no, explain a case where it would be beneficial to have version control of your data.**
 
+We did, we had one csv file with text of around 6000 articles. It isn't a big file so the process was mostly for learning. We placed the csv file in the Google Drive and made sure the dvc config file pointed to the google drive url. It improved the workflow by always guaranteeing that the data is available. 
 
 ### Question 11
 
@@ -99,13 +100,13 @@ Having coverage of 100% indicates a well-tested codebase, but it does not necess
 
 > **How did you configure experiments? Did you make use of config files? Explain with coding examples of how you would**
 > **run a experiment.**
-Yes, hydra package was used and thus a config folder was made including different experiment yaml files along with a default one.
+Yes, hydra package was used and thus a config folder was made including different experiment yaml files along with a default one. Hyperparameters such as epochs, learning rate and scheduler_steps were included in those.
 
 ### Question 13
 
 > **Reproducibility of experiments are important. Related to the last question, how did you secure that no information**
 > **is lost when running experiments and that your experiments are reproducible?**
-We took advantage of Docker that,
+We used wandb to keep track of our experiments, plots etc. And hydra to keep track of our experimental params.
 
 ### Question 14
 
@@ -119,7 +120,7 @@ We took advantage of Docker that,
 
 > **Docker is an important tool for creating containerized applications. Explain how you used docker in your**
 > **experiments? Include how you would run your docker images and include a link to one of your docker files.**
-
+We created three dockerfiles. One to run the same command as make train does, one to run the same command as make evaluate does and then we created a dockerfile that deploys our website with the availability of evaluation of text. run it by running docker run -p 8000:80 fastapi:latest after building it using docker build -f fastapi.dockerfile . -t fastapi:latest. The dockerfiles can be found in the dockerfiles folder.
 
 ### Question 16
 
