@@ -50,7 +50,7 @@ In the rest of the folders, resulting models, logs, tests and texts can be found
 
 > **Did you implement any rules for code quality and format? Additionally, explain with your own words why these**
 > **concepts matters in larger projects.**
-
+We followed PEP8 coding practice mostly on our src files covering areas such as indentation, line length, imports, whitespace, comments, and naming conventions, ensuring that Python code is readable and consistent.
 
 ## Version control
 
@@ -60,6 +60,7 @@ In the rest of the folders, resulting models, logs, tests and texts can be found
 ### Question 7
 
 > **How many tests did you implement?**
+Yes, 5 for the data and 5 for the training 
 
 
 
