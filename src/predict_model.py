@@ -1,7 +1,6 @@
 import os
 import torch
 import torch.nn as nn
-from torch.optim import AdamW
 from transformers import BertTokenizer, BertForSequenceClassification
 
 
@@ -23,7 +22,7 @@ def predict(model: torch.nn.Module, dataloader: torch.utils.data.DataLoader) -> 
 
 
 class FakeRealClassifier(nn.Module):
-    def __init__(self, pretrained_model_name='bert-base-cased', num_labels=2):
+    def __init__(self, pretrained_model_name="bert-base-cased", num_labels=2):
         super(FakeRealClassifier, self).__init__()
         self.bert = BertForSequenceClassification.from_pretrained(pretrained_model_name, num_labels=num_labels)
 
@@ -33,9 +32,9 @@ class FakeRealClassifier(nn.Module):
 
 
 # Load the saved model
-model_path = os.path.join(current_directory, 'models', 'best_model.pth')
+model_path = os.path.join(current_directory, "models", "best_model.pth")
 model = FakeRealClassifier()
-model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
+model.load_state_dict(torch.load(model_path, map_location=torch.device("cpu")))
 model.eval()
 
 # Initialize tokenizer
