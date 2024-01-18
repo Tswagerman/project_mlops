@@ -157,6 +157,7 @@ We mainly tried to understand the qualities of the GCP initially uploaded our da
 
 > **The backbone of GCP is the Compute engine. Explained how you made use of this service and what type of VMs**
 > **you used?**
+> 
 By initializing instances in Compute Engine we were able to create VM's that we could access from whatever laptop/pc we might had. So instead of using our own machine we took advantage of the ones available in gcp. Even though we created both gpu and cpu based instances, we didn't end up using them for the most of the project.
 
 
