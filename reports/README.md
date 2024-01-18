@@ -173,12 +173,15 @@ Data of our project is here, [this figure](figures/buckert.png)
 
 > **Upload one image of your GCP container registry, such that we can see the different images that you have stored.**
 > **You can take inspiration from [this figure](figures/registry.png).**
+>
+> Data of our project is here, [this figure](figures/containerr.png)
 
 ### Question 21
 
 > **Upload one image of your GCP cloud build history, so we can see the history of the images that have been build in**
 > **your project. You can take inspiration from [this figure](figures/build.png).**
-
+> 
+> Data of our project is here, [this figure](figures/cloud.png)
 
 ### Question 22
 
