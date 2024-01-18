@@ -20,7 +20,7 @@ s222977, s230250, s230251,
 ### Question 3
 > **What framework did you choose to work with and did it help you complete the project?**
 
-We used pytorch to train the Bert network.
+We used pytorch to train the Bert pre-trained network from hugging-face.
 
 ## Coding environment
 
@@ -38,13 +38,15 @@ docker run trainer
 docker build -f evaluate.dockerfile . -t evaluate:latest
 docker run evaluate
 
+The project was implemented both in Google Cloud VM and both on the HPC of the DTU.
+
 ### Question 5
 
 > **We expect that you initialized your project using the cookiecutter template. Explain the overall structure of your**
 > **code. Did you fill out every folder or only a subset?**
-
-
-### Question 6
+All in all we have covered most of the folders of the template excluding only the 'notebook' and the 'visualization' folder(which was replaced with the corresponding wandb folder).
+In the 'src' folder, we have implemented most of our main code in corresponding subfolders including 'predict_model.py' and 'train_model.py'. Specifically, the first includes code relative to evaluation processes while the latter includes the training loop. The 'model.py' and config files were included in the 'models' subfolder and the 'make_dataset.py' in the 'data' subfolder.
+In the rest of the folders, resulting models, logs, tests and texts can be found.
 
 > **Did you implement any rules for code quality and format? Additionally, explain with your own words why these**
 > **concepts matters in larger projects.**
@@ -69,9 +71,9 @@ docker run evaluate
 
 ### Question 9
 
-> **Did you workflow include using branches and pull requests? If yes, explain how. If not, explain how branches and**
+> **Did your workflow include using branches and pull requests? If yes, explain how. If not, explain how branches and**
 > **pull request can help improve version control.**
-
+??
 
 ### Question 10
 
@@ -95,7 +97,7 @@ docker run evaluate
 
 > **How did you configure experiments? Did you make use of config files? Explain with coding examples of how you would**
 > **run a experiment.**
-
+Yes, hydra package was used and thus a config folder was made including different experiment yaml files along with a default one.
 
 ### Question 13
 
@@ -138,8 +140,8 @@ docker run evaluate
 > Example:
 > *We used the following two services: Engine and Bucket. Engine is used for... and Bucket is used for...*
 >
-> Answer:
-
+> Answer: We mainly tried to understand the qualities of the gcp cloud and thus we uploaded our data and project to gcp using 
+Buckets from Cloud Storage. Moreover, we used Compute Engine to create VMs bot using our docker image and using a provided one from gcp inlcuding cuda support.
 
 ### Question 18
 
@@ -168,13 +170,13 @@ docker run evaluate
 
 > **Did you manage to deploy your model, either in locally or cloud? If not, describe why. If yes, describe how and**
 > **preferably how you invoke your deployed service?**
-
+We were able to deploy our model both locally and in the hpc of DTU. Using hpc was easier for now and provided enough perks to make to proceedure easier.
 
 ### Question 23
 
 > **Did you manage to implement monitoring of your deployed model? If yes, explain how it works. If not, explain how**
 > **monitoring would help the longevity of your application.**
-
+Wandb??
 ### Question 24
 
 > **How many credits did you end up using during the project and what service was most expensive?**
@@ -197,7 +199,8 @@ docker run evaluate
 
 > **Discuss the overall struggles of the project. Where did you spend most time and what did you do to overcome these**
 > **challenges?**
-
+Understanding the benefits and qualities of all of the services we were taught about and being able to implement them in our project was challenging enough. Google cloud was one of the difficulties for sure since it includes the manipulation of different tools.
+Additionally,.............
 
 ### Question 27
 
