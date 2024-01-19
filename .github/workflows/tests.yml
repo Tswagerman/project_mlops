@@ -26,5 +26,8 @@ jobs:
     - name: Test with pytest
       run: |
         pip install pytest
+        rm -r .dvc
+        dvc init
+        dvc remote add -d public-remote https://drive.google.com/drive/folders/1X2P4EfkFSkOlSrUg8ugygr5blUvGojsE?usp=sharing
         dvc fetch
         pytest tests/
