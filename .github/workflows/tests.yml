@@ -31,4 +31,4 @@ jobs:
         dvc init
         dvc remote add -d public-remote gdrive://1X2P4EfkFSkOlSrUg8ugygr5blUvGojsE
         git fetch
-        pytest -v
+        pytest tests/
