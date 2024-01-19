@@ -63,7 +63,7 @@ We followed PEP8 coding practice mostly on our src files covering areas such as 
 
 > **How many tests did you implement?**
 
-Yes, 5 for the data and 5 for the training 
+Yes, 5 for the data and 5 for the training. 
 
 
 
@@ -113,7 +113,7 @@ Yes, hydra package was used and thus a config folder was made including differen
 > **Reproducibility of experiments are important. Related to the last question, how did you secure that no information**
 > **is lost when running experiments and that your experiments are reproducible?**
 
-We used wandb to keep track of our experiments, plots etc. And hydra to keep track of our experimental params.
+WandB and Hydra play crucial roles in ensuring the reproducibility of our experiments. WandB allows us to log and visualize experiment metrics, hyperparameters, and even system metrics.Hydra complements this by enabling us to manage configuration files for different experiments. 
 
 ### Question 14
 
@@ -122,7 +122,7 @@ We used wandb to keep track of our experiments, plots etc. And hydra to keep tra
 > **inspiration from [this figure](figures/wandb.png). Explain what metrics you are tracking and why they are**
 > **important.**
 
-This image indicates the type of tests we did using Wandb [this figure](figures/wandb_team7.png)
+This image indicates the type of tests we did using Wandb [W&B](figures/wandb_team7.png)
 
 ### Question 15
 
@@ -166,7 +166,7 @@ By initializing instances in Compute Engine we were able to create VM's that we 
 > **Insert 1-2 images of your GCP bucket, such that we can see what data you have stored in it.**
 > **You can take inspiration from [this figure](figures/bucket.png).**
  
-Data of our project is here, [this figure](figures/buckert.png)
+Data of our project is here, [Bucket](figures/buckert.png)
 
 
 ### Question 20
@@ -174,14 +174,14 @@ Data of our project is here, [this figure](figures/buckert.png)
 > **Upload one image of your GCP container registry, such that we can see the different images that you have stored.**
 > **You can take inspiration from [this figure](figures/registry.png).**
 
- Data of our project is here, [this figure](figures/containerr.png)
+ Data of our project is in this container, [Container](figures/containerr.png)
 
 ### Question 21
 
 > **Upload one image of your GCP cloud build history, so we can see the history of the images that have been build in**
 > **your project. You can take inspiration from [this figure](figures/build.png).**
  
- Data of our project is here, [this figure](figures/cloud.png)
+ Data of our project is here, [Cloud](figures/cloud.png)
 
 ### Question 22
 
@@ -201,7 +201,7 @@ No
 
 > **How many credits did you end up using during the project and what service was most expensive?**
 
- Around 30 dollars were spend, [this figure](figures/spent.png)
+ Around 30 dollars were spent, [Money spent](figures/spent.png)
 
 
 ## Overall discussion of project
@@ -214,7 +214,7 @@ No
 > **You can take inspiration from [this figure](figures/overview.png). Additionally in your own words, explain the**
 > **overall steps in figure.**
 
-Architecture [this figure](figures/overview_modded.png)
+Architecture [Overview](figures/overview_modded.png)
 
 
 
