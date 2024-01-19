@@ -28,6 +28,6 @@ jobs:
         pip install pytest
         rm -r .dvc
         dvc init
-        dvc remote add -d public-remote https://drive.google.com/drive/folders/1X2P4EfkFSkOlSrUg8ugygr5blUvGojsE?usp=sharing
+        dvc remote add -d public-remote gdrive://1X2P4EfkFSkOlSrUg8ugygr5blUvGojsE
         dvc fetch
         pytest tests/
