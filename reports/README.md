@@ -62,6 +62,7 @@ We followed PEP8 coding practice mostly on our src files covering areas such as 
 ### Question 7
 
 > **How many tests did you implement?**
+
 Yes, 5 for the data and 5 for the training 
 
 
@@ -149,14 +150,14 @@ While training the model, the profiler offered by pytorch was proven helpful eno
 >
 > Example:
 > *We used the following two services: Engine and Bucket. Engine is used for... and Bucket is used for...*
->
+
 We mainly tried to understand the qualities of the GCP initially uploaded our data and project using Buckets from Cloud Storage which are mainly used to store data. Moreover, we used Compute Engine to create VMs both using our own docker image and using a provided one from GCP that includes necessary packages like torch. Additionally, we used Container Registry and tried to take advantage of Cloud Run in order to store and deploy our container images from the cloud.
 
 ### Question 18
 
 > **The backbone of GCP is the Compute engine. Explained how you made use of this service and what type of VMs**
 > **you used?**
-> 
+ 
 By initializing instances in Compute Engine we were able to create VM's that we could access from whatever laptop/pc we might had. So instead of using our own machine we took advantage of the ones available in gcp. Even though we created both gpu and cpu based instances, we didn't end up using them for the most of the project.
 
 
@@ -164,7 +165,7 @@ By initializing instances in Compute Engine we were able to create VM's that we 
 
 > **Insert 1-2 images of your GCP bucket, such that we can see what data you have stored in it.**
 > **You can take inspiration from [this figure](figures/bucket.png).**
-> 
+ 
 Data of our project is here, [this figure](figures/buckert.png)
 
 
@@ -172,35 +173,35 @@ Data of our project is here, [this figure](figures/buckert.png)
 
 > **Upload one image of your GCP container registry, such that we can see the different images that you have stored.**
 > **You can take inspiration from [this figure](figures/registry.png).**
->
-> Data of our project is here, [this figure](figures/containerr.png)
+
+ Data of our project is here, [this figure](figures/containerr.png)
 
 ### Question 21
 
 > **Upload one image of your GCP cloud build history, so we can see the history of the images that have been build in**
 > **your project. You can take inspiration from [this figure](figures/build.png).**
-> 
-> Data of our project is here, [this figure](figures/cloud.png)
+ 
+ Data of our project is here, [this figure](figures/cloud.png)
 
 ### Question 22
 
 > **Did you manage to deploy your model, either in locally or cloud? If not, describe why. If yes, describe how and**
 > **preferably how you invoke your deployed service?**
-> 
+ 
 We were able to deploy our model both locally and in the hpc of DTU. Using hpc was easier for now and provided enough perks to make to procedure easier. Deploying the model in GCP was not accomplished because multiple errors could not be skipped.
 
 ### Question 23
 
 > **Did you manage to implement monitoring of your deployed model? If yes, explain how it works. If not, explain how**
 > **monitoring would help the longevity of your application.**
-> 
+ 
 No
 
 ### Question 24
 
 > **How many credits did you end up using during the project and what service was most expensive?**
->
-> Around 30 dollars were spend, [this figure](figures/spent.png)
+
+ Around 30 dollars were spend, [this figure](figures/spent.png)
 
 
 ## Overall discussion of project
@@ -212,8 +213,8 @@ No
 > **Include a figure that describes the overall architecture of your system and what services that you make use of.**
 > **You can take inspiration from [this figure](figures/overview.png). Additionally in your own words, explain the**
 > **overall steps in figure.**
->
-> Architecture [this figure](figures/overview_modded.png)
+
+Architecture [this figure](figures/overview_modded.png)
 
 
 
