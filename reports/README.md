@@ -62,6 +62,7 @@ We followed PEP8 coding practice mostly on our src files covering areas such as 
 ### Question 7
 
 > **How many tests did you implement?**
+
 Yes, 5 for the data and 5 for the training 
 
 
