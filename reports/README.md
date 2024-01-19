@@ -52,7 +52,7 @@ In the rest of the folders, resulting models, logs, tests and texts can be found
 > **Did you implement any rules for code quality and format? Additionally, explain with your own words why these**
 > **concepts matters in larger projects.**
 
-We followed PEP8 coding practice mostly on our src files covering areas such as indentation, line length, imports, whitespace, comments, and naming conventions, ensuring that Python code is readable and consistent. In addition, we used ruff as a linter to identify syntactical and stylish problems in our src files. By writing our code in this way we ensured that the quality and readability of the code will remain high throughout the whole process.
+We followed PEP8 coding practice mostly on our src files covering areas such as indentation, line length, imports, whitespace, comments, and naming conventions, ensuring that Python code is readable and consistent. In addition, we used ruff as a linter to identify syntactical and stylish problems in our src files. By writing our code in this way we ensured that the quality and readability of the code will remain high throughout the whole process.  In larger projects, these concepts matter if you want people to be able to read and write on your codebase without first having to understand your way of writing.
 
 ## Version control
 
@@ -62,7 +62,6 @@ We followed PEP8 coding practice mostly on our src files covering areas such as 
 ### Question 7
 
 > **How many tests did you implement?**
-
 Yes, 5 for the data and 5 for the training 
 
 
@@ -72,7 +71,7 @@ Yes, 5 for the data and 5 for the training
 > **What is the total code coverage (in percentage) of your code? If you code had an code coverage of 100% (or close**
 > **to), would you still trust it to be error free? Explain you reasoning.**
 
-Having coverage of 100% indicates a well-tested codebase, but it does not necessarily mean that the code is error-free since it only measures the percentage of code that is executed by the tests and it doesn't guarantee that every possible use case or input scenario has been tested.
+Having coverage of 100% indicates a well-tested codebase, but it does not necessarily mean that the code is error-free since it only measures the percentage of code that is executed by the tests and it doesn't guarantee that every possible use case or input scenario has been tested. The coverage of our unit tests was 80% of the code. As the 'Coverage' figure illustrates [Coverage](figures/coverage.png)
 
 ### Question 9
 
