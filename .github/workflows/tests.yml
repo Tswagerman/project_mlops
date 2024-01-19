@@ -31,5 +31,4 @@ jobs:
         dvc remote add -d public-remote gdrive://1X2P4EfkFSkOlSrUg8ugygr5blUvGojsE
         mkdir -p /home/runner/.cache/pydrive2fs/710796635688-iivsgbgsb6uv1fap6635dhvuei09o66c.apps.googleusercontent.com/
         echo "${{ secrets.GOOGLE_DRIVE }}" > /home/runner/.cache/pydrive2fs/710796635688-iivsgbgsb6uv1fap6635dhvuei09o66c.apps.googleusercontent.com/default.json
-        dvc fetch
         pytest tests/
