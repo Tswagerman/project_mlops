@@ -1,0 +1,215 @@
+<h1>Exam report for 02476 Machine Learning Operations</h1>
+<h2>Group information</h2>
+<h3>Question 1</h3>
+<blockquote>
+<p><strong>Enter the group number you signed up on <learn.inside.dtu.dk></strong></p>
+</blockquote>
+<p>7</p>
+<h3>Question 2</h3>
+<blockquote>
+<p><strong>Enter the study number for each member in the group</strong></p>
+</blockquote>
+<p>s222977, s230250, s230251, s222948</p>
+<h3>Question 3</h3>
+<blockquote>
+<p><strong>What framework did you choose to work with and did it help you complete the project?</strong></p>
+</blockquote>
+<p>We used pytorch to train the Bert pre-trained network from hugging-face.</p>
+<h2>Coding environment</h2>
+<blockquote>
+<p>In the following section we are interested in learning more about your local development environment.</p>
+</blockquote>
+<h3>Question 4</h3>
+<blockquote>
+<p><strong>Explain how you managed dependencies in your project? Explain the process a new team member would have to go</strong>
+<strong>through to get an exact copy of your environment.</strong></p>
+</blockquote>
+<p>We used dvc to always fetch the same data file from the google drive. The data is a small csv file containing the text and label of around 6000 articles.
+Docker is used to create a container to deploy our website.
+docker build -f fastapi.dockerfile . -t fastapi:latest
+docker run -p 8000:80 fastapi:latest</p>
+<p>The project was implemented both in Google Cloud VM and both on the HPC of the DTU.</p>
+<h3>Question 5</h3>
+<blockquote>
+<p><strong>We expect that you initialized your project using the cookiecutter template. Explain the overall structure of your</strong>
+<strong>code. Did you fill out every folder or only a subset?</strong></p>
+</blockquote>
+<p>All in all we have covered most of the folders of the template excluding only the 'notebook' and the 'visualization' folder(which was replaced with the corresponding wandb folder).
+In the 'src' folder, we have implemented most of our main code in corresponding subfolders including 'predict_model.py' and 'train_model.py'. Specifically, the first includes code relative to evaluation processes while the latter includes the training loop. The 'model.py' and config files were included in the 'models' subfolder and the 'make_dataset.py' in the 'data' subfolder.
+In the rest of the folders, resulting models, logs, tests and texts can be found.</p>
+<h3>Question 6</h3>
+<blockquote>
+<p><strong>Did you implement any rules for code quality and format? Additionally, explain with your own words why these</strong>
+<strong>concepts matters in larger projects.</strong></p>
+</blockquote>
+<p>We followed PEP8 coding practice mostly on our src files covering areas such as indentation, line length, imports, whitespace, comments, and naming conventions, ensuring that Python code is readable and consistent. In addition, we used ruff as a linter to identify syntactical and stylish problems in our src files. By writing our code in this way we ensured that the quality and readability of the code will remain high throughout the whole process.  In larger projects, these concepts matter if you want people to be able to read and write on your codebase without first having to understand your way of writing.</p>
+<h2>Version control</h2>
+<blockquote>
+<p>In the following section we are interested in how version control was used in your project during development to
+corporate and increase the quality of your code.</p>
+</blockquote>
+<h3>Question 7</h3>
+<blockquote>
+<p><strong>How many tests did you implement?</strong></p>
+</blockquote>
+<p>Yes, 5 for the data and 5 for the training. </p>
+<h3>Question 8</h3>
+<blockquote>
+<p><strong>What is the total code coverage (in percentage) of your code? If you code had an code coverage of 100% (or close</strong>
+<strong>to), would you still trust it to be error free? Explain you reasoning.</strong></p>
+</blockquote>
+<p>Having coverage of 100% indicates a well-tested codebase, but it does not necessarily mean that the code is error-free since it only measures the percentage of code that is executed by the tests and it doesn't guarantee that every possible use case or input scenario has been tested. The coverage of our unit tests was 80% of the code. As the 'Coverage' figure illustrates <a href="figures/coverage.png">Coverage</a></p>
+<h3>Question 9</h3>
+<blockquote>
+<p><strong>Did your workflow include using branches and pull requests? If yes, explain how. If not, explain how branches and</strong>
+<strong>pull request can help improve version control.</strong></p>
+</blockquote>
+<p>Yes, we had a repository on github and everyone had their own branch they worked on. Whenever anyone felt they had some working code that would improve the project, they merged it with the master branch.</p>
+<h3>Question 10</h3>
+<blockquote>
+<p><strong>Did you use DVC for managing data in your project? If yes, then how did it improve your project to have version</strong>
+<strong>control of your data. If no, explain a case where it would be beneficial to have version control of your data.</strong></p>
+</blockquote>
+<p>We did, we had one csv file with text of around 6000 articles. It isn't a big file so the process was mostly for learning. We placed the csv file in the Google Drive and made sure the dvc config file pointed to the google drive url. It improved the workflow by always guaranteeing that the data is available. </p>
+<h3>Question 11</h3>
+<blockquote>
+<p><strong>Discuss you continues integration setup. What kind of CI are you running (unittesting, linting, etc.)? Do you test</strong>
+<strong>multiple operating systems, python version etc. Do you make use of caching? Feel free to insert a link to one of</strong>
+<strong>your github actions workflow.</strong></p>
+</blockquote>
+<p>We ended up using pytest to perform unit tests to our codebase and ruff as a linter to highlight syntactical and stylistic problems. We performed several tests for the training process, fetching of the data and the creation of the datasets. We used caching for composing the various docker images.</p>
+<h2>Running code and tracking experiments</h2>
+<blockquote>
+<p>In the following section we are interested in learning more about the experimental setup for running your code and
+especially the reproducibility of your experiments.</p>
+</blockquote>
+<h3>Question 12</h3>
+<blockquote>
+<p><strong>How did you configure experiments? Did you make use of config files? Explain with coding examples of how you would</strong>
+<strong>run a experiment.</strong></p>
+</blockquote>
+<p>Yes, hydra package was used and thus a config folder was made including different experiment yaml files along with a default one. Hyperparameters such as epochs, learning rate and scheduler_steps were included in those.</p>
+<h3>Question 13</h3>
+<blockquote>
+<p><strong>Reproducibility of experiments are important. Related to the last question, how did you secure that no information</strong>
+<strong>is lost when running experiments and that your experiments are reproducible?</strong></p>
+</blockquote>
+<p>WandB and Hydra play crucial roles in ensuring the reproducibility of our experiments. WandB allows us to log and visualize experiment metrics, hyperparameters, and even system metrics.Hydra complements this by enabling us to manage configuration files for different experiments. </p>
+<h3>Question 14</h3>
+<blockquote>
+<p><strong>Upload 1 to 3 screenshots that show the experiments that you have done in W&amp;B (or another experiment tracking</strong>
+<strong>service of your choice). This may include loss graphs, logged images, hyperparameter sweeps etc. You can take</strong>
+<strong>inspiration from <a href="figures/wandb.png">this figure</a>. Explain what metrics you are tracking and why they are</strong>
+<strong>important.</strong></p>
+</blockquote>
+<p>This image indicates the type of tests we did using Wandb <a href="figures/wandb_team7.png">W&amp;B</a></p>
+<h3>Question 15</h3>
+<blockquote>
+<p><strong>Docker is an important tool for creating containerized applications. Explain how you used docker in your</strong>
+<strong>experiments? Include how you would run your docker images and include a link to one of your docker files.</strong></p>
+</blockquote>
+<p>We created three dockerfiles. One to run the same command as make train does, one to run the same command as make evaluate does and then we created a dockerfile that deploys our website with the availability of evaluation of text. run it by running docker run -p 8000:80 fastapi:latest after building it using docker build -f fastapi.dockerfile . -t fastapi:latest. The dockerfiles can be found in the dockerfiles folder.</p>
+<h3>Question 16</h3>
+<blockquote>
+<p><strong>When running into bugs while trying to run your experiments, how did you perform debugging? Additionally, did you</strong>
+<strong>try to profile your code or do you think it is already perfect?</strong></p>
+</blockquote>
+<p>While training the model, the profiler offered by pytorch was proven helpful enough to identify problems in the code and helped us optimize it. In addition, we used the debugger from visual studio code to insert breakpoints and examine certain behaviours. While testing, logging the errors helped us understand the reason the failures occured, but also pytest was proven helpful with its error logs. </p>
+<h2>Working in the cloud</h2>
+<blockquote>
+<p>In the following section we would like to know more about your experience when developing in the cloud.</p>
+</blockquote>
+<h3>Question 17</h3>
+<blockquote>
+<p><strong>List all the GCP services that you made use of in your project and shortly explain what each service does?</strong></p>
+<p>Answer length: 50-200 words.</p>
+<p>Example:
+<em>We used the following two services: Engine and Bucket. Engine is used for... and Bucket is used for...</em></p>
+</blockquote>
+<p>We mainly tried to understand the qualities of the GCP initially uploaded our data and project using Buckets from Cloud Storage which are mainly used to store data. Moreover, we used Compute Engine to create VMs both using our own docker image and using a provided one from GCP that includes necessary packages like torch. Additionally, we used Container Registry and tried to take advantage of Cloud Run in order to store and deploy our container images from the cloud.</p>
+<h3>Question 18</h3>
+<blockquote>
+<p><strong>The backbone of GCP is the Compute engine. Explained how you made use of this service and what type of VMs</strong>
+<strong>you used?</strong></p>
+</blockquote>
+<p>By initializing instances in Compute Engine we were able to create VM's that we could access from whatever laptop/pc we might had. So instead of using our own machine we took advantage of the ones available in gcp. Even though we created both gpu and cpu based instances, we didn't end up using them for the most of the project.</p>
+<h3>Question 19</h3>
+<blockquote>
+<p><strong>Insert 1-2 images of your GCP bucket, such that we can see what data you have stored in it.</strong>
+<strong>You can take inspiration from <a href="figures/bucket.png">this figure</a>.</strong></p>
+</blockquote>
+<p>Data of our project is here, <a href="figures/buckert.png">Bucket</a></p>
+<h3>Question 20</h3>
+<blockquote>
+<p><strong>Upload one image of your GCP container registry, such that we can see the different images that you have stored.</strong>
+<strong>You can take inspiration from <a href="figures/registry.png">this figure</a>.</strong></p>
+</blockquote>
+<p>Data of our project is in this container, <a href="figures/containerr.png">Container</a></p>
+<h3>Question 21</h3>
+<blockquote>
+<p><strong>Upload one image of your GCP cloud build history, so we can see the history of the images that have been build in</strong>
+<strong>your project. You can take inspiration from <a href="figures/build.png">this figure</a>.</strong></p>
+</blockquote>
+<p>Data of our project is here, <a href="figures/cloud.png">Cloud</a></p>
+<h3>Question 22</h3>
+<blockquote>
+<p><strong>Did you manage to deploy your model, either in locally or cloud? If not, describe why. If yes, describe how and</strong>
+<strong>preferably how you invoke your deployed service?</strong></p>
+</blockquote>
+<p>We were able to deploy our model both locally and in the hpc of DTU. Using hpc was easier for now and provided enough perks to make to procedure easier. Deploying the model in GCP was not accomplished because multiple errors could not be skipped.</p>
+<h3>Question 23</h3>
+<blockquote>
+<p><strong>Did you manage to implement monitoring of your deployed model? If yes, explain how it works. If not, explain how</strong>
+<strong>monitoring would help the longevity of your application.</strong></p>
+</blockquote>
+<p>No</p>
+<h3>Question 24</h3>
+<blockquote>
+<p><strong>How many credits did you end up using during the project and what service was most expensive?</strong></p>
+</blockquote>
+<p>Around 30 dollars were spent, <a href="figures/spent.png">Money spent</a></p>
+<h2>Overall discussion of project</h2>
+<blockquote>
+<p>In the following section we would like you to think about the general structure of your project.</p>
+</blockquote>
+<h3>Question 25</h3>
+<blockquote>
+<p><strong>Include a figure that describes the overall architecture of your system and what services that you make use of.</strong>
+<strong>You can take inspiration from <a href="figures/overview.png">this figure</a>. Additionally in your own words, explain the</strong>
+<strong>overall steps in figure.</strong></p>
+</blockquote>
+<p>Architecture <a href="figures/overview_modded.png">Overview</a></p>
+<h3>Question 26</h3>
+<blockquote>
+<p><strong>Discuss the overall struggles of the project. Where did you spend most time and what did you do to overcome these</strong>
+<strong>challenges?</strong></p>
+</blockquote>
+<p>Understanding the benefits and qualities of all of the services we were taught about and being able to implement them in our project was challenging enough. Google cloud was one of the difficulties for sure since it includes the manipulation of different tools.
+Additionally,The learning material on the slides proved very helpful for us along with searching stuff online and AI tools such as chatGPT. Overall although it was a struggle we consider this project one of the most complete and "professional" projects we have done so far.</p>
+<h3>Question 27</h3>
+<blockquote>
+<p><strong>State the individual contributions of each team member. This is required information from DTU, because we need to</strong>
+<strong>make sure all members contributed actively to the project</strong></p>
+</blockquote>
+<p>s222977: I was responsible for DVC, Docker, and FastAPI, and kicked off the GitHub repository with Cookiecutter.</p>
+<blockquote>
+<p>s230250: I was in charge of the correct data impelmentation/tokenization in order to feed the model and write unit tests for the dataset.</p>
+<p>s230251: My responsibility was to write unit tests, ensure ruff is not complaining for our code and optimize the training process of the model.</p>
+<p>s222948: I was responsible for Wandb and Hydra along with the transformation of the code and also experimented with the Google Cloud Services</p>
+</blockquote>
+<p>Everyone contributed to everything, with people being responsible for different parts of the project.</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>9a348b0162ab0f56881a8e7e5c15eef1eaaeb2c</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
